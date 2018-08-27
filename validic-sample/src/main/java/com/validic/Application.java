@@ -13,7 +13,6 @@ import com.validic.config.ClientConfig;
 import com.validic.rest.client.JobDetails;
 import com.validic.rest.client.JobServiceClient;
 
-@PropertySource("classpath:application.properties")
 public class Application {
 	@Autowired
 	static Environment env;
