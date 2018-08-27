@@ -47,7 +47,6 @@ public class JobServiceClient {
     public int countJobDetails(String location, String search, String type){
     	int page = 0; int count = 0;List<JobDetails> list;
     	do {
-            System.out.println("Count is: " + count);
         	list = convertjsonArrayToEntityList(getJobDetails(location, search, type, String.valueOf(page)));
         	count = count + list.size();
     		page++;
@@ -55,7 +54,7 @@ public class JobServiceClient {
     	return count;
     }
     
-    public List<JobDetails> convertjsonArrayToEntityList(String  jsonArray){
+    private List<JobDetails> convertjsonArrayToEntityList(String  jsonArray){
     	List<JobDetails> asList = Collections.emptyList();
 		try {
 			asList = objectMapper.readValue(
