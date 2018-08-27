@@ -2,10 +2,8 @@ package com.validic.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.PropertySource;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.validic.rest.client.JobServiceClient;
 
 @Configuration

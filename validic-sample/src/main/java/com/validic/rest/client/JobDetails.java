@@ -7,6 +7,13 @@ public class JobDetails {
 	private String location;
 	private String type;
 	private String search;
+	public JobDetails() {
+	}
+	public JobDetails(String location2, String code, String type2) {
+		this.location = location2;
+		this.search = code;
+		this.type = type2;
+	}
 	public String getLocation() {
 		return location;
 	}
@@ -21,10 +28,10 @@ public class JobDetails {
 	}
 	@Override
     public String toString() {
-        return "JobDetails{" +
-                "location='" + location + '\'' +
-                ", type=" + type +
-                '}';
+        return location + ":\n"+
+                " - "+ search +"\n"+
+                " - "+ type  
+                ;
     }
 	public String getSearch() {
 		return search;
