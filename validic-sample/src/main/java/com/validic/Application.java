@@ -17,9 +17,14 @@ public class Application {
 	@Autowired
 	static Environment env;
     
+	/**
+	 * right click and run as java application to print results in console.
+	 * @param args
+	 */
     public static void main(String args[]) {
     	AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(ClientConfig.class);
     	
+    	/*The following 3 lists are read from application.properties file*/
     	List<String> locations = Arrays.asList(ctx.getBean(Environment.class).getProperty("listOfLocations").split(","));
     	List<String> codes = Arrays.asList(ctx.getBean(Environment.class).getProperty("listOfCodes").split(","));
     	List<String> types = Arrays.asList(ctx.getBean(Environment.class).getProperty("listOfTypes").split(","));

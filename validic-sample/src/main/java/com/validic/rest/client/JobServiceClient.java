@@ -19,6 +19,7 @@ public class JobServiceClient {
 	private final RestTemplate restTemplate;
 	private final ObjectMapper objectMapper;
 	
+	/*read from application.properties file*/
 	@Value( "${endpoint}" )
 	private String url;
 	 
@@ -28,6 +29,14 @@ public class JobServiceClient {
         objectMapper.findAndRegisterModules();
     }
  
+    /**
+     * Utility method to build uri with query parameters. passing null will build the uri
+     * without any parameters
+     * @param location
+     * @param search
+     * @param type
+     * @return
+     */
     private UriComponentsBuilder buildUri(String location, String search, String type){
     	UriComponentsBuilder builder = UriComponentsBuilder
 	    	    .fromUriString(url);
@@ -39,11 +48,27 @@ public class JobServiceClient {
     		builder.queryParam(type, "true");
     	return builder;
     }
+    /**
+     * this is where call is made to https://jobs.github.com/api
+     * @param location
+     * @param search
+     * @param type
+     * @param page
+     * @return
+     */
     public  String getJobDetails(String location, String search, String type, String page) {
     	String uri = buildUri(location,search,type).queryParam("page", page).toUriString();
         return restTemplate.getForObject(uri, String.class);
     }
     
+    /**
+     * This method increments page numbers until an empty array reponse and returns the final list size.
+     * 
+     * @param location
+     * @param search
+     * @param type
+     * @return
+     */
     public int countJobDetails(String location, String search, String type){
     	int page = 0; int count = 0;List<JobDetails> list;
     	do {
@@ -54,6 +79,11 @@ public class JobServiceClient {
     	return count;
     }
     
+    /**
+     * utility method to conver json string to JobDetails entity list
+     * @param jsonArray
+     * @return
+     */
     private List<JobDetails> convertjsonArrayToEntityList(String  jsonArray){
     	List<JobDetails> asList = Collections.emptyList();
 		try {
