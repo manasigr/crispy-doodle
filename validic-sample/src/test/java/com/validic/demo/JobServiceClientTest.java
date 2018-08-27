@@ -43,8 +43,20 @@ public class JobServiceClientTest {
 	    }
 	   @Test
 	    public void whenCallingCountJob() {
-	    	int count = this.githubJobClient.countJobDetails("new+york", "java", "full_time");
-	    	System.out.println("Found "+count + " total jobs for new+york, java, full_time");
+	    	int count = this.githubJobClient.countJobDetails("new+york", "python", "part_time");
+	    	System.out.println("Found "+count + " total jobs for new+york, python, part_time");
+	    	count = this.githubJobClient.countJobDetails("new+york", "python", "full_time");
+	    	System.out.println("Found "+count + " total jobs for new+york, python, full_time");
+	    	count = this.githubJobClient.countJobDetails(null, null, null);
+	    	System.out.println("Found "+count + " total jobs");
+	   }
+	   @Test
+	    public void whenCallingJobWithoutParams() throws JsonParseException, JsonMappingException, IOException {
+		   String jsonArray = this.githubJobClient.getJobDetails(null,null,null, "10");
+	    	List<JobDetails> asList = objectMapper.readValue(
+	    		      jsonArray, new TypeReference<List<JobDetails>>() { });
+	    	System.out.println("Found "+asList.size() + " jobs for no params on page 10");
+
 	   }
 	   
 

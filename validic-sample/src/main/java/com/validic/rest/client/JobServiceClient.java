@@ -30,13 +30,13 @@ public class JobServiceClient {
  
     private UriComponentsBuilder buildUri(String location, String search, String type){
     	UriComponentsBuilder builder = UriComponentsBuilder
-	    	    .fromUriString(url)
-	    	    // Add query parameter
-	    	    .queryParam("location",location)
-	    	    .queryParam("search", search);
-    	if(type != null){
+	    	    .fromUriString(url);
+	    if(location!= null)
+	    	builder.queryParam("location",location);
+	    if(search != null)
+	    	builder.queryParam("search", search);
+    	if(type != null)
     		builder.queryParam(type, "true");
-    	}
     	return builder;
     }
     public  String getJobDetails(String location, String search, String type, String page) {
